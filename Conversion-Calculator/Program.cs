@@ -362,7 +362,15 @@ namespace Conversion_Calculator
                 }
             }
 
-            result.Reverse();
+            char[] reverseChars = result.ToCharArray();
+            Array.Reverse(reverseChars);
+
+            result = "";
+            
+            for (int i = 0; i < reverseChars.Length; i++)
+            {
+                result += reverseChars[i];
+            }
 
             Console.WriteLine();
             Console.WriteLine("Hexadecimal: {0}", result);
