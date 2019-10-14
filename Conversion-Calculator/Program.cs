@@ -277,7 +277,6 @@ namespace Conversion_Calculator
             bool userConfirm = false;
             string userInput = "", result = string.Empty;
             double decimalNumber = 0.0;
-            double remainder = 0.0;
             List<double> listOfDoubles = new List<double>();
 
             while (userConfirm == false)
