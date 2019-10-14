@@ -54,7 +54,7 @@ namespace Conversion_Calculator
             bool userConfirm = false;
             string userInput = "", result = string.Empty;
             double decimalNumber = 0.0;
-            double octalNumber = 0.0, remainder = 0.0;
+            double remainder = 0.0;
 
             while (userConfirm == false)
             {
@@ -158,6 +158,125 @@ namespace Conversion_Calculator
             Console.WriteLine("Binary: {0}", result);
         }
 
+        private static void HexadecimalToDecimal()
+        {
+            bool userConfirm = false, badInput = false;
+            string userInput = "", result = string.Empty;
+            double decimalNumber = 0.0;
+            List<double> listOfDoubles = new List<double>();
+
+            while (userConfirm == false)
+            {
+                badInput = false;
+                Console.Write("Hexadecimal Number: ");
+                userInput = Console.ReadLine();
+
+                char[] charArray = userInput.ToCharArray();
+                listOfDoubles.Clear();
+
+                for (int i = 0; i < charArray.Length; i++)
+                {
+                    if (badInput == true)
+                    {
+                        break;
+                    }
+                    switch (charArray[i])
+                    {
+                        case '0':
+                            listOfDoubles.Add(0);
+                            userConfirm = true;
+                            break;
+                        case '1':
+                            listOfDoubles.Add(1);
+                            userConfirm = true;
+                            break;
+                        case '2':
+                            listOfDoubles.Add(2);
+                            userConfirm = true;
+                            break;
+                        case '3':
+                            listOfDoubles.Add(3);
+                            userConfirm = true;
+                            break;
+                        case '4':
+                            listOfDoubles.Add(4);
+                            userConfirm = true;
+                            break;
+                        case '5':
+                            listOfDoubles.Add(5);
+                            userConfirm = true;
+                            break;
+                        case '6':
+                            listOfDoubles.Add(6);
+                            userConfirm = true;
+                            break;
+                        case '7':
+                            listOfDoubles.Add(7);
+                            userConfirm = true;
+                            break;
+                        case '8':
+                            listOfDoubles.Add(8);
+                            userConfirm = true;
+                            break;
+                        case '9':
+                            listOfDoubles.Add(9);
+                            userConfirm = true;
+                            break;
+                        case 'A':
+                            listOfDoubles.Add(10);
+                            userConfirm = true;
+                            break;
+                        case 'B':
+                            listOfDoubles.Add(11);
+                            userConfirm = true;
+                            break;
+                        case 'C':
+                            listOfDoubles.Add(12);
+                            userConfirm = true;
+                            break;
+                        case 'D':
+                            listOfDoubles.Add(13);
+                            userConfirm = true;
+                            break;
+                        case 'E':
+                            listOfDoubles.Add(14);
+                            userConfirm = true;
+                            break;
+                        case 'F':
+                            listOfDoubles.Add(15);
+                            userConfirm = true;
+                            break;
+                        default:
+                            Console.WriteLine("Make sure to input your hexadecimal value with all uppercase letters!");
+                            userConfirm = false;
+                            badInput = true;
+                            break;
+                    }
+                }
+            }
+
+            if (userConfirm == true)
+            {
+                listOfDoubles.Reverse();
+
+                for (int i = 0; i < listOfDoubles.Count; i++)
+                {
+                    listOfDoubles[i] = listOfDoubles[i] * Math.Pow(16, i);
+                    decimalNumber += listOfDoubles[i];
+                }
+
+                result = decimalNumber.ToString();
+
+                Console.WriteLine();
+                Console.WriteLine("Decimal: {0}", result);
+            }
+        }
+
+        private static void DecialToHexadecimal()
+        {
+
+        }
+
         static void Main(string[] args)
         {
             int choice = -1;
@@ -213,10 +332,10 @@ namespace Conversion_Calculator
                         DecimalToBinary();
                         break;
                     case 5:
-                        Console.Write("Convert Hexadecimal value to Decimal.");
+                        HexadecimalToDecimal();
                         break;
                     case 6:
-                        Console.Write("Convert Decimal value to Hexadecimal.");
+                        DecialToHexadecimal();
                         break;
                     case 7:
                         Console.Write("Exit the Program.");
