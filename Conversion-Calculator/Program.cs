@@ -274,7 +274,98 @@ namespace Conversion_Calculator
 
         private static void DecialToHexadecimal()
         {
+            bool userConfirm = false;
+            string userInput = "", result = string.Empty;
+            double decimalNumber = 0.0;
+            double remainder = 0.0;
+            List<double> listOfDoubles = new List<double>();
 
+            while (userConfirm == false)
+            {
+                Console.Write("Decimal: ");
+                userInput = Console.ReadLine();
+                if (!double.TryParse(userInput, out decimalNumber))
+                {
+                    Console.WriteLine("\nPlease make a selection by entering a Decimal.");
+                }
+                else
+                {
+                    decimalNumber = Convert.ToInt32(userInput);
+                    break;
+                }
+            }
+
+            while (decimalNumber > 16)
+            {
+                decimalNumber = Math.Truncate(decimalNumber) / 16;
+                remainder = (decimalNumber - Math.Truncate(decimalNumber)) * 16;
+                listOfDoubles.Add(remainder);
+            }
+
+            remainder = Math.Truncate(decimalNumber);
+            listOfDoubles.Add(remainder);
+
+            for (int i = 0; i < listOfDoubles.Count; i++)
+            {
+                switch (listOfDoubles[i])
+                {
+                    case 0:
+                        result += '0';
+                        break;
+                    case 1:
+                        result += '1';
+                        break;
+                    case 2:
+                        result += '2';
+                        break;
+                    case 3:
+                        result += '3';
+                        break;
+                    case 4:
+                        result += '4';
+                        break;
+                    case 5:
+                        result += '5';
+                        break;
+                    case 6:
+                        result += '6';
+                        break;
+                    case 7:
+                        result += '7';
+                        break;
+                    case 8:
+                        result += '8';
+                        break;
+                    case 9:
+                        result += '9';
+                        break;
+                    case 10:
+                        result += "A";
+                        break;
+                    case 11:
+                        result += 'B';
+                        break;
+                    case 12:
+                        result += 'C';
+                        break;
+                    case 13:
+                        result += 'D';
+                        break;
+                    case 14:
+                        result += 'E';
+                        break;
+                    case 15:
+                        result += 'F';
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            result.Reverse();
+
+            Console.WriteLine();
+            Console.WriteLine("Hexadecimal: {0}", result);
         }
 
         static void Main(string[] args)
