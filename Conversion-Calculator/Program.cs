@@ -8,9 +8,161 @@ namespace Conversion_Calculator
 {
     class Program
     {
+        private static void OctalToDecimal()
+        {
+            bool userConfirm = false;
+            string userInput = "", result = string.Empty;
+            int octalNumber = -1;
+            double decimalNumber = 0.0;
+
+            while (userConfirm == false)
+            {
+                Console.Write("Octal: ");
+                userInput = Console.ReadLine();
+                if (!int.TryParse(userInput, out octalNumber))
+                {
+                    Console.WriteLine("\nPlease make a selection by entering an Octal.");
+                }
+                else
+                {
+                    octalNumber = Convert.ToInt32(userInput);
+                    break;
+                }
+            }
+
+            List<double> listOfDoubles = new List<double>();
+            while (octalNumber > 0)
+            {
+                listOfDoubles.Add(octalNumber % 10);
+                octalNumber = octalNumber / 10;
+            }
+
+            for (int i = 0; i < listOfDoubles.Count; i++)
+            {
+                listOfDoubles[i] = listOfDoubles[i] * Math.Pow(8, i);
+                decimalNumber += listOfDoubles[i];
+            }
+
+            result = decimalNumber.ToString();
+
+            Console.WriteLine();
+            Console.WriteLine("Decimal: {0}", result);
+        }
+
+        private static void DecimalToOctal()
+        {
+            bool userConfirm = false;
+            string userInput = "", result = string.Empty;
+            double decimalNumber = 0.0;
+            double octalNumber = 0.0, remainder = 0.0;
+
+            while (userConfirm == false)
+            {
+                Console.Write("Decimal: ");
+                userInput = Console.ReadLine();
+                if (!double.TryParse(userInput, out decimalNumber))
+                {
+                    Console.WriteLine("\nPlease make a selection by entering a Decimal.");
+                }
+                else
+                {
+                    decimalNumber = Convert.ToInt32(userInput);
+                    break;
+                }
+            }
+
+            while (decimalNumber > 8)
+            {
+                decimalNumber = Math.Truncate(decimalNumber) / 8;
+                remainder = (decimalNumber - Math.Truncate(decimalNumber)) * 8;
+                result = remainder.ToString() + result;
+            }
+
+            remainder = Math.Truncate(decimalNumber);
+            result = remainder.ToString() + result;
+
+            Console.WriteLine();
+            Console.WriteLine("Octal: {0}", result);
+        }
+
+        private static void BinaryToDecimal()
+        {
+            bool userConfirm = false;
+            string userInput = "", result = string.Empty;
+            int binaryNumber = 0;
+            double decimalNumber = 0.0;
+
+            while (userConfirm == false)
+            {
+                Console.Write("Binary Number: ");
+                userInput = Console.ReadLine();
+                if (!int.TryParse(userInput, out binaryNumber))
+                {
+                    Console.WriteLine("\nPlease make a selection by entering a Binary Number.");
+                }
+                else
+                {
+                    binaryNumber = Convert.ToInt32(userInput);
+                    break;
+                }
+            }
+
+            List<double> listOfDoubles = new List<double>();
+            while (binaryNumber > 0)
+            {
+                listOfDoubles.Add(binaryNumber % 10);
+                binaryNumber = binaryNumber / 10;
+            }
+
+            for (int i = 0; i < listOfDoubles.Count; i++)
+            {
+                listOfDoubles[i] = listOfDoubles[i] * Math.Pow(2, i);
+                decimalNumber += listOfDoubles[i];
+            }
+
+            result = decimalNumber.ToString();
+
+            Console.WriteLine();
+            Console.WriteLine("Decimal: {0}", result);
+        }
+
+        private static void DecimalToBinary()
+        {
+            bool userConfirm = false;
+            string userInput = "", result = string.Empty;
+            int decimalNumber = -1, remainder;
+
+            while (userConfirm == false)
+            {
+                Console.Write("Decimal: ");
+                userInput = Console.ReadLine();
+                if (!int.TryParse(userInput, out decimalNumber))
+                {
+                    Console.WriteLine("\nPlease make a selection by entering a Decimal.");
+                }
+                else
+                {
+                    decimalNumber = Convert.ToInt32(userInput);
+                    break;
+                }
+            }
+
+            while (decimalNumber > 0)
+            {
+                remainder = decimalNumber % 2;
+                decimalNumber /= 2;
+                result = remainder.ToString() + result;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Binary: {0}", result);
+        }
+
         static void Main(string[] args)
         {
-            int choice;
+            int choice = -1;
+            bool userConfirm = false;
+            string userInput = "";
 
             do
             {
@@ -30,6 +182,55 @@ namespace Conversion_Calculator
                                     5. Convert Hexadecimal to Decimal
                                     6. Convert Decimal to Hexadecimal
                                     7. Exit the Program");
+
+                while (userConfirm == false)
+                {
+                    Console.Write("\n                                   Enter an option. (1-7): ");
+                    userInput = Console.ReadLine();
+                    if (!int.TryParse(userInput, out choice))
+                    {
+                        Console.WriteLine("\nPlease make a selection by entering an integer.");
+                    }
+                    else
+                    {
+                        choice = Convert.ToInt32(userInput);
+                        break;
+                    }
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        OctalToDecimal();
+                        break;
+                    case 2:
+                        DecimalToOctal();
+                        break;
+                    case 3:
+                        BinaryToDecimal();
+                        break;
+                    case 4:
+                        DecimalToBinary();
+                        break;
+                    case 5:
+                        Console.Write("Convert Hexadecimal value to Decimal.");
+                        break;
+                    case 6:
+                        Console.Write("Convert Decimal value to Hexadecimal.");
+                        break;
+                    case 7:
+                        Console.Write("Exit the Program.");
+                        break;
+                    default:
+                        Console.Write("Please enter a valid selection.");
+                        break;
+                }
+
+                Console.WriteLine("\nPlease press 'enter' to continue.");
+                Console.ReadLine();
+
+
+
             } while (choice != 7);
         }
     }
